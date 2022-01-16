@@ -33,8 +33,8 @@ public class JdbcCustomerDangerRepository {
 		jdbcTemplate.execute(QUERY);
 	}
 
-	public void updateCustomerFullName(int customerId, String fullName) {
-		final String STORED_PROCEDURE = "CALL update_jdbc_customer('" + customerId + "' , '" + fullName + "')";
+	public void updateCustomerFullName(int customerId, String newFullName) {
+		final String STORED_PROCEDURE = "CALL update_jdbc_customer('" + customerId + "' , '" + newFullName + "')";
 		jdbcTemplate.execute(STORED_PROCEDURE);
 	}
 

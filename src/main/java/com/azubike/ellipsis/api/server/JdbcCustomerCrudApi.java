@@ -30,8 +30,9 @@ public class JdbcCustomerCrudApi {
 	}
 
 	@GetMapping("/customer")
-	public List<JdbcCustomer> findCustomerByGender(@RequestParam(required = true, name = "gender") String gender) {
-		return repository.findByGender(gender);
+	public List<JdbcCustomer> findCustomerByGender(
+			@RequestParam(required = true, name = "genderCode") String genderCode) {
+		return repository.findByGender(genderCode);
 	}
 
 	@PostMapping("/customer")
@@ -42,6 +43,6 @@ public class JdbcCustomerCrudApi {
 	@PatchMapping("/customer/{customerId}")
 	public void updateCustomerFullName(@RequestBody(required = true) JdbcCustomerPatchRequest request,
 			@PathVariable(required = true, name = "customerId") int customerId) {
-		repository.updateCustomerFullName(customerId, request.getFullName());
+		repository.updateCustomerFullName(customerId, request.getNewFullName());
 	}
 }

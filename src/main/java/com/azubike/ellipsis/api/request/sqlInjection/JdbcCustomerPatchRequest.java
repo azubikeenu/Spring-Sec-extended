@@ -1,14 +1,14 @@
 package com.azubike.ellipsis.api.request.sqlInjection;
 
 public class JdbcCustomerPatchRequest {
-	private String fullName;
+	private String newFullName;
 
-	public String getFullName() {
-		return fullName;
+	public String getNewFullName() {
+		return newFullName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setNewFullName(String newFullName) {
+		this.newFullName = newFullName;
 	}
 
 }
