@@ -18,14 +18,13 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-@Component
+//@Component
 public class SqlInjectionFilter extends OncePerRequestFilter {
 
 	private static final String[] SQL_REGEX = { "(?i)(.*)(\\b)+SELECT(\\b)+\\s.*(\\b)+FROM(\\b)+\\s.*(.*)",
-			"(?i)(.*)(\\b)+DROP(\\b)+\\s.*(.*)" };
+			"(?i)(.*)(\\b)+DROP(\\b)+\\s.*(.*)", "(?i)(.*)(\\b)+UPDATE(\\b)+\\s.*(.*)" };
 
 	private List<Pattern> sqlValidationPatterns;
 

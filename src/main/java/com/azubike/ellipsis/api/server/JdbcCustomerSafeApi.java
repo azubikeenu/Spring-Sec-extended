@@ -15,34 +15,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.azubike.ellipsis.api.request.sqlInjection.JdbcCustomerPatchRequest;
 import com.azubike.ellipsis.entity.JdbcCustomer;
-import com.azubike.ellipsis.repository.JdbcCustomerDangerRepository;
+import com.azubike.ellipsis.repository.JdbcCustomerSafeRepository;
 
 //@RestController
-//@RequestMapping("api/sqlinjection/danger/v1")
+//@RequestMapping("/api/sqlinjection/safe/v1")
 //@Validated
-public class JdbcCustomerApi {
-	@Autowired
-	private JdbcCustomerDangerRepository repository;
+public class JdbcCustomerSafeApi {
 
-	@GetMapping("/customer/{email}")
+	@Autowired
+	private JdbcCustomerSafeRepository repository;
+
+	@GetMapping(value = "/customer/{email}")
 	public JdbcCustomer findCustomerByEmail(@PathVariable(required = true, name = "email") String email) {
 		return repository.findCustomerByEmail(email);
 	}
 
-	@GetMapping("/customer")
-	public List<JdbcCustomer> findCustomerByGender(
+	@GetMapping(value = "/customer")
+	public List<JdbcCustomer> findCustomersByGender(
 			@Pattern(regexp = "^[MF]$", message = "Invalid gender") @RequestParam(required = true, name = "genderCode") String genderCode) {
 		return repository.findCustomersByGender(genderCode);
 	}
 
-	@PostMapping("/customer")
-	public void createCustomer(@RequestBody(required = true) @Valid JdbcCustomer customer) {
-		repository.createNewCustomer(customer);
+	@PostMapping(value = "/customer")
+	public void createCustomer(@RequestBody(required = true) @Valid JdbcCustomer newCustomer) {
+		repository.createNewCustomer(newCustomer);
 	}
 
-	@PatchMapping("/customer/{customerId}")
-	public void updateCustomerFullName(@RequestBody(required = true) JdbcCustomerPatchRequest request,
-			@PathVariable(required = true, name = "customerId") int customerId) {
+	@PatchMapping(value = "/customer/{customerId}")
+	public void updateCustomerFullName(@PathVariable(required = true, name = "customerId") int customerId,
+			@RequestBody(required = true) JdbcCustomerPatchRequest request) {
 		repository.updateCustomerFullName(customerId, request.getNewFullName());
 	}
+
 }

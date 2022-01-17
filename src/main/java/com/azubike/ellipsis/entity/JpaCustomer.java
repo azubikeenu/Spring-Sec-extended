@@ -1,14 +1,20 @@
 package com.azubike.ellipsis.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
-public class JdbcCustomer {
+@Entity
+public class JpaCustomer implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	private int customerId;
+
 	private String fullName;
 
 	@Email
