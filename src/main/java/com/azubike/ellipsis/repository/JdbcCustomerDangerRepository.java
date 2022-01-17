@@ -29,7 +29,7 @@ public class JdbcCustomerDangerRepository {
 	public void createNewCustomer(JdbcCustomer customer) {
 		final String QUERY = "INSERT INTO jdbc_customer (full_name,email,birth_date,gender) VALUES (" + "'"
 				+ customer.getFullName() + " ', " + "'" + customer.getEmail() + " ', " + "'" + customer.getBirthDate()
-				+ " ', " + "'" + customer.getGender() + " ', " + ")";
+				+ " ', " + "'" + customer.getGender() + " ' )";
 		jdbcTemplate.execute(QUERY);
 	}
 

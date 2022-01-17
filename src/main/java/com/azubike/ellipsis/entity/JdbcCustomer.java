@@ -2,14 +2,20 @@ package com.azubike.ellipsis.entity;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.data.annotation.Id;
 
 public class JdbcCustomer {
 	@Id
 	private int customerId;
 	private String fullName;
+	@Email
 	private String email;
+
 	private LocalDate birthDate;
+	@Pattern(regexp = "^[MF]$")
 	private String gender;
 
 	public int getCustomerId() {
