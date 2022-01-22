@@ -2,9 +2,10 @@ package com.azubike.ellipsis.entity;
 
 import java.time.LocalDate;
 
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+
+import org.springframework.data.annotation.Id;
 
 public class JdbcCustomer {
 	@Id
