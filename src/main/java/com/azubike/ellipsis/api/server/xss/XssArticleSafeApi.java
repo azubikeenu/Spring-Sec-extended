@@ -2,6 +2,7 @@ package com.azubike.ellipsis.api.server.xss;
 
 import java.util.List;
 
+import org.owasp.encoder.Encode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +26,7 @@ public class XssArticleSafeApi {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String create(@RequestBody XssArticle article) {
+		article.setArticle(Encode.forHtml(article.getArticle()));
 		XssArticle savedArticle = xssArticleRepository.save(article);
 		return "Article saved as " + savedArticle;
 
