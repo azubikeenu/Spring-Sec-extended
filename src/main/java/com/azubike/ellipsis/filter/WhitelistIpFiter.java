@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
 public class WhitelistIpFiter extends OncePerRequestFilter {
-	private final static String[] IP_LIST = { "0:0:0:0:0:0:0:1", "192.168.8.101" };
+	private final static String[] IP_LIST = { "0:0:0:0:0:0:0:1", "132.189.8.101" };
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
