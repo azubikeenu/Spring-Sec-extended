@@ -22,4 +22,12 @@ public class ApiExceptionHandler {
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).body(GENERIC_MESSAGE);
 	}
 
+	@ExceptionHandler({ IllegalArgumentException.class })
+	public ResponseEntity<ApiErrorMessage> illegalArgumentExceptionHandler(IllegalArgumentException ex) {
+		LOG.error(ex.getMessage());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).body(GENERIC_MESSAGE);
+
+	}
+
 }
