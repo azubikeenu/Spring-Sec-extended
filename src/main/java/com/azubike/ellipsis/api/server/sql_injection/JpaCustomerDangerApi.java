@@ -1,4 +1,4 @@
-package com.azubike.ellipsis.api.server;
+package com.azubike.ellipsis.api.server.sql_injection;
 
 //@RestController
 //@RequestMapping("/api/sqlinjection/danger/v2")
