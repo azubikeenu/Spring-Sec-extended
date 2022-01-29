@@ -1,6 +1,9 @@
 package com.azubike.ellipsis.entity;
 
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 public class BasicAuthUser {
 
@@ -10,6 +13,9 @@ public class BasicAuthUser {
 	private String passwordHash;
 	private String salt;
 	private String displayName;
+
+	@MappedCollection(idColumn = "user_id")
+	private Set<BasicAclUserUriRef> allowedUris;
 
 	public int getUserId() {
 		return userId;
@@ -49,6 +55,14 @@ public class BasicAuthUser {
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+
+	public Set<BasicAclUserUriRef> getAllowedUris() {
+		return allowedUris;
+	}
+
+	public void setAllowedUris(Set<BasicAclUserUriRef> allowedUris) {
+		this.allowedUris = allowedUris;
 	}
 
 }

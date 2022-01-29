@@ -10,9 +10,9 @@ import org.bouncycastle.util.encoders.Hex;
 
 public class HashUtil {
 	public static String sha256(String orginalString, String salt) throws Exception {
-		String hashWithSalt = StringUtils.join(orginalString, salt);
-		MessageDigest digest = MessageDigest.getInstance("SHA256");
-		byte[] hashedByte = digest.digest(hashWithSalt.getBytes(StandardCharsets.UTF_8));
+		String orginalWithSalt = StringUtils.join(orginalString, salt);
+		var digest = MessageDigest.getInstance("SHA-256");
+		byte[] hashedByte = digest.digest(orginalWithSalt.getBytes(StandardCharsets.UTF_8));
 		return new String(Hex.encode(hashedByte));
 	}
 
@@ -26,8 +26,8 @@ public class HashUtil {
 				salt.getBytes(StandardCharsets.UTF_8), 5);
 	}
 
-	public static boolean isBcryptMatch(String orginalString, String hashedString) {
-		return OpenBSDBCrypt.checkPassword(hashedString, orginalString.getBytes(StandardCharsets.UTF_8));
+	public static boolean isBcryptMatch(String original, String hashValue) {
+		return OpenBSDBCrypt.checkPassword(hashValue, original.getBytes(StandardCharsets.UTF_8));
 	}
 
 }

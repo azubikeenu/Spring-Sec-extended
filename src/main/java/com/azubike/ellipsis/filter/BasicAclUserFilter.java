@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,12 +22,11 @@ import com.azubike.ellipsis.util.EncodeDecodeUtils;
 import com.azubike.ellipsis.util.EncryptDecryptUtil;
 import com.azubike.ellipsis.util.HashUtil;
 
-public class BasicAuthFilter extends OncePerRequestFilter {
+//@Configuration
+//@Order(0)
+public class BasicAclUserFilter extends OncePerRequestFilter {
+	@Autowired
 	private BasicAuthUserRepository basicAuthUserRepository;
-
-	public BasicAuthFilter(BasicAuthUserRepository basicAuthUserRepository) {
-		this.basicAuthUserRepository = basicAuthUserRepository;
-	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -62,7 +62,8 @@ public class BasicAuthFilter extends OncePerRequestFilter {
 			return false;
 		}
 		String passwordHash = foundUser.get().getPasswordHash();
-		return HashUtil.isBcryptMatch(plainPassword, passwordHash);
+		var isMatched = HashUtil.isBcryptMatch(plainPassword, passwordHash);
+		return isMatched;
 	}
 
 }
