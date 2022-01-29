@@ -14,7 +14,7 @@ public class EncryptDecryptUtil {
 	private static final String ALGORITHM = "AES";
 	private static final String AES_TRANSFORMATION = "AES/CBC/PKCS7Padding";
 	// IV and secret credentials in production should be placed in secure storage
-	// services like hasicorp vault(It should be 16 characters)
+	// services like hashicorp vault(It should be 16 characters)
 	private static final String IV = "zu1Lx26DMDn81BFi";
 
 	private static IvParameterSpec ivParameterSpec;
@@ -34,6 +34,7 @@ public class EncryptDecryptUtil {
 		SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), ALGORITHM);
 		cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
 		byte[] encryptedBytes = cipher.doFinal(originalText.getBytes(StandardCharsets.UTF_8));
+		// encode the encrypted bytes in Hex format
 		return new String(Hex.encode(encryptedBytes));
 
 	}
