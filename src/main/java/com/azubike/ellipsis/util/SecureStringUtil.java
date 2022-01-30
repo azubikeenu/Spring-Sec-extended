@@ -1,5 +1,7 @@
 package com.azubike.ellipsis.util;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.SecureRandom;
 
 public class SecureStringUtil {
@@ -22,6 +24,10 @@ public class SecureStringUtil {
 			output.append(SEED_STRING.charAt(index));
 		}
 		return output.toString();
+	}
+
+	public static final boolean compareStrings(String s1, String s2) {
+		return MessageDigest.isEqual(s1.getBytes(StandardCharsets.UTF_8), s2.getBytes(StandardCharsets.UTF_8));
 	}
 
 }

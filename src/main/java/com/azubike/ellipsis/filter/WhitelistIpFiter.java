@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-@Component
+//@Component
 public class WhitelistIpFiter extends OncePerRequestFilter {
 	private final static String[] IP_LIST = { "0:0:0:0:0:0:0:1", "132.189.8.101" };
 
