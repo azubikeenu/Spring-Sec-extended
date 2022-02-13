@@ -61,14 +61,15 @@ public class BasicAclUriFilter extends OncePerRequestFilter {
 	}
 
 	private boolean isUrlValid(String requestURI, String method, BasicAuthUser foundUser) {
+		boolean isValidUrl = false;
 		for (BasicAclUserUriRef uri : foundUser.getAllowedUris()) {
 			BasicAclUri foundUri = uriRepository.findById(uri.getUriId()).get();
 			if (StringUtils.equalsAnyIgnoreCase(foundUri.getMethod(), method)
 					&& Pattern.matches(foundUri.getUri(), requestURI)) {
-				return true;
+				isValidUrl = true;
 			}
 		}
-		return false;
+		return isValidUrl;
 	}
 
 }

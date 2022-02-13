@@ -14,8 +14,11 @@ import com.azubike.ellipsis.util.SecureStringUtil;
 
 @Service
 public class SessionTokenService {
+	// this persists the encrypted user details in the session object on successful
+	// login
 	public String store(HttpServletRequest request, SessionCookieToken sessionCookieToken) {
 		HttpSession session = request.getSession(false);
+		// destroy currently stored sessions
 		if (session != null) {
 			session.invalidate();
 		}
@@ -24,13 +27,14 @@ public class SessionTokenService {
 		return session.getId();
 	}
 
+	// this is used to validate request token headers and session token
 	public Optional<SessionCookieToken> read(HttpServletRequest request, String provideToken) {
 		var session = request.getSession(false);
 		if (session == null) {
 			// there is no session
 			return Optional.empty();
 		} else {
-			// get the user credentials
+			// get the user credentials from session object
 			String username = (String) session.getAttribute(SesssionCookieConstant.SESSION_ATTRIBUTE_USERNAME);
 			try {
 				// hash the token
